@@ -1,8 +1,45 @@
-import React from "react";
-import ModalDiv from "./Modal";
+"use client";
+import { useState } from "react";
 import LicenseSection from "./LicenseSection";
 
 const MainSEction = () => {
+  const [randomString, setRandomString] = useState("");
+  const timeout = 2 * 60 * 1000; // Timeout set to 2 minutes (in milliseconds)
+
+  const generateRandomString = () => {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let newRandomString = "";
+
+    for (let i = 0; i < 200; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      newRandomString += characters.charAt(randomIndex);
+    }
+
+    setRandomString(newRandomString);
+  };
+
+  const handleButtonClick = () => {
+    const startTime = new Date().getTime();
+    generateRandomStringWithTimeout(startTime, timeout);
+  };
+
+  const generateRandomStringWithTimeout = (startTime, timeout) => {
+    const currentTime = new Date().getTime();
+
+    if (currentTime - startTime < timeout) {
+      // If less than 2 minutes have passed, generate a random string
+      generateRandomString();
+      // Call the function recursively with a delay of 100 milliseconds
+      setTimeout(
+        () => generateRandomStringWithTimeout(startTime, timeout),
+        100
+      );
+    } else {
+      // If 2 minutes have passed, stop generating and update the state
+      // (optional: you can also display a message indicating the end of generation)
+    }
+  };
   return (
     <div className="grid grid-cols-3 gap-8 my-20 mx-auto max-w-[1200px]">
       <div className="col-span-2">
@@ -11,16 +48,8 @@ const MainSEction = () => {
             Wallet Addresses
           </h2>
           <hr className="my-2 border-slate-500" />
-          <div className="p-3 my-6 border border-gray-400 rounded-lg border-opacity-20">
-            <p className="text-md">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-              quam saepe sunt error, quo, possimus impedit iste nobis temporibus
-              earum unde animi ex in commodi cupiditate. Velit quisquam commodi
-              ut. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Deserunt quam saepe sunt error, quo, possimus impedit iste nobis
-              temporibus earum unde animi ex in commodi cupiditate. Velit
-              quisquam commodi ut.
-            </p>
+          <div className="h-40 p-3 my-6 border border-gray-400 rounded-lg border-opacity-20">
+            <p className="w-full overflow-x-hidden text-wrap">{randomString}</p>
           </div>
         </div>
         <div className="container p-6 my-6 border border-gray-400 rounded-lg bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg">
@@ -188,7 +217,10 @@ const MainSEction = () => {
               </label>
             </div>
           </div>
-          <button className="w-full p-4 mt-4 font-semibold uppercase bg-purple-800 rounded-lg">
+          <button
+            onClick={handleButtonClick}
+            className="w-full p-3 mt-4 font-semibold uppercase bg-purple-800 rounded-lg"
+          >
             find
           </button>
           <LicenseSection />
