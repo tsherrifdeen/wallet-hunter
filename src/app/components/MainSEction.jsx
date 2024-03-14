@@ -11,11 +11,10 @@ const MainSEction = () => {
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let newRandomString = "";
 
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 320; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
       newRandomString += characters.charAt(randomIndex);
     }
-
     setRandomString(newRandomString);
   };
 
@@ -44,12 +43,20 @@ const MainSEction = () => {
     <div className="grid grid-cols-3 gap-8 my-20 mx-auto max-w-[1200px]">
       <div className="col-span-2">
         <div className="container p-6 my-6 border border-gray-400 rounded-lg bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg ">
-          <h2 className="text-xl font-semibold underline-offset-2 ">
-            Wallet Addresses
-          </h2>
+          <div className="flex justify-between">
+            <h2 className="text-xl font-semibold underline-offset-2 ">
+              Finder
+            </h2>
+            <p className="font-semibold text-md">324 Wallets found</p>
+          </div>
           <hr className="my-2 border-slate-500" />
           <div className="h-40 p-3 my-6 border border-gray-400 rounded-lg border-opacity-20">
-            <p className="w-full overflow-x-hidden text-wrap">{randomString}</p>
+            <p className="w-full overflow-x-hidden text-wrap">
+              {randomString.substring(0, 80)} <br />
+              {randomString.substring(81, 160)} <br />
+              {randomString.substring(161, 240)} <br />
+              {randomString.substring(241, 320)}
+            </p>
           </div>
         </div>
         <div className="container p-6 my-6 border border-gray-400 rounded-lg bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg">

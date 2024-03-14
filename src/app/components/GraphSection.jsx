@@ -48,8 +48,7 @@ const GraphSection = () => {
       <div className="col-span-3">
         <div className="">
           <img
-            // src="https://pub-a9e95ffe81d843ed8789f708ee388a09.r2.dev/modeLeftGraph.gif"
-            src="/mode-static-graph.gif"
+            src="https://pub-a9e95ffe81d843ed8789f708ee388a09.r2.dev/modeLeftGraph.gif"
             alt="Mode Left Graph"
           />
         </div>
@@ -95,8 +94,7 @@ const GraphSection = () => {
       <div className="col-span-3">
         <div className="">
           <img
-            // src="https://pub-a9e95ffe81d843ed8789f708ee388a09.r2.dev/modeStaticGraph.gif"
-            src="/mode-static-graph.gif"
+            src="https://pub-a9e95ffe81d843ed8789f708ee388a09.r2.dev/modeStaticGraph.gif"
             alt="Mode Left Graph"
           />
         </div>

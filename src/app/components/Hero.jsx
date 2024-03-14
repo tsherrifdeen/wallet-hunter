@@ -6,17 +6,6 @@ const Hero = () => {
           <h1 className="mb-8 text-3xl opacity-1 z-2 lg:text-6xl">
             Wallet Hunter
           </h1>
-
-          <div className="opacity-1">
-            <a href="https://app.mav.xyz" target="_blank" rel="noreferrer">
-              <button
-                type="button"
-                className="px-4 py-2 text-white border-2 rounded-full border-violet-800"
-              >
-                LAUNCH APP →
-              </button>
-            </a>
-          </div>
         </div>
 
         <div>
