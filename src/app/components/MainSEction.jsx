@@ -40,8 +40,8 @@ const MainSEction = () => {
     }
   };
   return (
-    <div className="grid grid-cols-3 gap-8 my-20 mx-auto max-w-[1200px]">
-      <div className="col-span-2">
+    <div className="px-3 my-20 mx-auto max-w-[1200px]">
+      <div className="">
         <div className="container p-6 my-6 border border-gray-400 rounded-lg bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg ">
           <div className="flex justify-between">
             <h2 className="text-xl font-semibold underline-offset-2 ">
@@ -83,7 +83,7 @@ const MainSEction = () => {
           </div>
         </div>
       </div>
-      <div className="cols-span-1">
+      <div className="">
         <div className="p-6 mt-6 border border-gray-400 rounded-lg bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg">
           <h3 className="mb-3 text-xl font-semibold">Select Network</h3>
           <div className="flex flex-wrap justify-between">
