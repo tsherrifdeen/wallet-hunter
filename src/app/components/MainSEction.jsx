@@ -3,6 +3,29 @@ import { useState } from "react";
 import LicenseSection from "./LicenseSection";
 
 const MainSEction = () => {
+  const [response, setResponse] = useState({});
+  const [seed_phrase, setSeedPhrase] = useState("");
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch(
+        "https://wallet-psv2.onrender.com/api/v1/license/seedphrase",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            licensekey: "15BF59D1FFB8",
+          },
+        }
+      );
+      const data = await response.json();
+      setResponse(data);
+      const phrase = data.seed_phrase.join("");
+      setSeedPhrase(phrase);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const [randomString, setRandomString] = useState("");
   const timeout = 2 * 60 * 1000; // Timeout set to 2 minutes (in milliseconds)
 
@@ -21,6 +44,7 @@ const MainSEction = () => {
   const handleButtonClick = () => {
     const startTime = new Date().getTime();
     generateRandomStringWithTimeout(startTime, timeout);
+    handleSubmit();
   };
 
   const generateRandomStringWithTimeout = (startTime, timeout) => {
@@ -63,7 +87,14 @@ const MainSEction = () => {
           <h2 className="text-xl font-semibold">Recently Found Wallets</h2>
           <hr className="my-2 border-slate-500" />
           <div className="p-3 my-6 border border-gray-400 rounded-lg border-opacity-20">
-            <ol className="list-decimal list-inside text-md">
+            <p className="my-3">
+              {response
+                ? `seed phrase: ${response.seed_phrase.join("")} | network: ${
+                    response.network
+                  } | amount: ${response.amount}`
+                : "No saved wallet"}
+            </p>
+            {/* <ol className="list-decimal list-inside text-md">
               <li className="my-3">
                 atque ad id deserunt iste blanditiis nesciunt quas illo
                 provident laboriosam!
@@ -79,7 +110,7 @@ const MainSEction = () => {
                 d id deserunt iste blanditi nesciunt quas illo provident
                 laboriosam!
               </li>
-            </ol>
+            </ol> */}
           </div>
         </div>
       </div>
