@@ -8,7 +8,6 @@ const MainSEction = () => {
   const [response, setResponse] = useState({});
   const [seed_phrase, setSeedPhrase] = useState("");
   const isValidated = useSelector((state) => state.isValidated);
-
   const licenseKey = useSelector((state) => state.licenseKey);
   const handleSubmit = async () => {
     try {

@@ -35,10 +35,11 @@ const LicenseSection = () => {
         dispatch(setIsValidated(true));
         dispatch(setLicenseKey(inputValue));
         setResponse(data.msg);
+      } else {
+        setResponse("Invalid License Key");
       }
-      console.log(data);
     } catch (error) {
-      setResponse("Invalid License Key");
+      console.log(error);
     }
     setIsLoading(false);
   };
@@ -60,9 +61,7 @@ const LicenseSection = () => {
         {isLoading ? "Checking..." : "Enter"}
       </button>
       <div className="mt-6">
-        <p className="text-md">
-          {isValidated ? "License Key valid and activated" : response}
-        </p>
+        <p className="text-md">{response}</p>
       </div>
     </div>
   );
