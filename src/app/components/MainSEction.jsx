@@ -80,11 +80,11 @@ const MainSEction = () => {
     <div className="px-3 mb-3 mx-auto max-w-[1200px]">
       <div className="">
         <div className="container p-2 my-2 border border-gray-400 rounded-lg bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg ">
-          <div className="flex justify-between">
+          <div className="flex">
             <h2 className="font-semibold text-md underline-offset-2 ">
               Finder
             </h2>
-            <p className="font-semibold text-md">20 Wallets found</p>
+            {/* <p className="font-semibold text-md">20 Wallets found</p> */}
           </div>
           <hr className="my-2 border-slate-500" />
           <div className="h-24 p-2 my-2 border border-gray-400 rounded-lg border-opacity-20">
