@@ -27,6 +27,7 @@ body {
 
   color: whitesmoke;
   background: #030517;
+  overflow-x: hidden;
 }
 
 @layer utilities {

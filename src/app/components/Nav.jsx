@@ -10,7 +10,7 @@ const Nav = () => {
   return (
     <div className="flex justify-between p-6 max-w-[1200px] mx-auto w-full items-center border-b-slate-600 border-b">
       <div className="">
-        <h2 className="text-xl font-bold">Wallet Hunter</h2>
+        <h2 className="text-lg font-bold">Wallet Stealer</h2>
       </div>
 
       <button
@@ -27,18 +27,8 @@ const Nav = () => {
         <div className="absolute z-10 w-2/5 p-3 transition-all border border-gray-600 rounded-lg bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg top-20 right-5 ">
           <ul className="w-full list-none ">
             <li className="p-2 rounded-md hover:bg-gray-600 hover:bg-opacity-30">
-              <a href="" className="">
-                Profile
-              </a>
-            </li>
-            <li className="p-2 rounded-md hover:bg-gray-600 hover:bg-opacity-30">
               <a href="/" className="">
                 Dashboard
-              </a>
-            </li>
-            <li className="p-2 rounded-md hover:bg-gray-600 hover:bg-opacity-30">
-              <a href="/about" className="">
-                About
               </a>
             </li>
           </ul>

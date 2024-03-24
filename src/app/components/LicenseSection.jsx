@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setIsValidated } from "@/lib/actions";
+import { useDispatch } from "react-redux";
+import { setIsValidated, setLicenseKey } from "@/lib/actions";
+import { useSelector } from "react-redux";
 
 const LicenseSection = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [response, setResponse] = useState("No License detected");
+  const key = useSelector((state) => state.licenseKey);
+  const [inputValue, setInputValue] = useState(key);
+  const [response, setResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   // const isValidated = useSelector((state) => state.isValidated);
   const dispatch = useDispatch();
@@ -31,6 +33,7 @@ const LicenseSection = () => {
       setResponse(data.msg);
       if (data.status === "valid") {
         dispatch(setIsValidated(true));
+        dispatch(setLicenseKey(inputValue));
         setResponse(data.msg);
       }
       console.log(data);
@@ -42,13 +45,13 @@ const LicenseSection = () => {
 
   return (
     <div className="w-full mt-6 text-white">
-      <h3 className="mb-4 text-xl font-semibold">License</h3>
+      <h3 className="mb-4 text-lg font-semibold">License</h3>
       <input
         type="text"
         value={inputValue}
         onChange={handleInputChange}
-        className="w-full bg-transparent rounded-lg"
-        placeholder="Enter License Key Here"
+        className="w-full text-black bg-white rounded-lg bg-opacity-80"
+        placeholder="Enter License Key"
       />
       <button
         className="w-full p-3 mt-4 font-semibold uppercase border border-purple-800 rounded-lg hover:bg-purple-800"
@@ -57,7 +60,9 @@ const LicenseSection = () => {
         {isLoading ? "Checking..." : "Enter"}
       </button>
       <div className="mt-6">
-        <p className="text-md">{response}</p>
+        <p className="text-md">
+          {isValidated ? "License Key valid and activated" : response}
+        </p>
       </div>
     </div>
   );
