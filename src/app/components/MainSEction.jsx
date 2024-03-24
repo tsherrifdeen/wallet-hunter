@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import LicenseSection from "./LicenseSection";
-
+import { useSelector } from "react-redux";
 const MainSEction = () => {
   const [response, setResponse] = useState({});
   const [seed_phrase, setSeedPhrase] = useState("");
+  const isValidated = useSelector((state) => state.isValidated);
   const handleSubmit = async () => {
     try {
       const response = await fetch(
@@ -19,7 +19,7 @@ const MainSEction = () => {
       );
       const data = await response.json();
       setResponse(data);
-      const phrase = data.seed_phrase.join("");
+      const phrase = data.seed_phrase.join(" ");
       setSeedPhrase(phrase);
       console.log(data);
     } catch (error) {
@@ -64,34 +64,29 @@ const MainSEction = () => {
     }
   };
   return (
-    <div className="px-3 my-20 mx-auto max-w-[1200px]">
+    <div className="px-3 mx-auto max-w-[1200px]">
       <div className="">
-        <div className="container p-6 my-6 border border-gray-400 rounded-lg bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg ">
+        <div className="container p-2 my-2 border border-gray-400 rounded-lg bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg ">
           <div className="flex justify-between">
-            <h2 className="text-xl font-semibold underline-offset-2 ">
+            <h2 className="text-lg font-semibold underline-offset-2 ">
               Finder
             </h2>
-            <p className="font-semibold text-md">324 Wallets found</p>
+            <p className="font-semibold text-md">20 Wallets found</p>
           </div>
           <hr className="my-2 border-slate-500" />
-          <div className="h-40 p-3 my-6 border border-gray-400 rounded-lg border-opacity-20">
+          <div className="h-20 p-2 my-2 border border-gray-400 rounded-lg border-opacity-20">
             <p className="w-full overflow-x-hidden text-wrap">
-              {randomString.substring(0, 80)} <br />
-              {randomString.substring(81, 160)} <br />
-              {randomString.substring(161, 240)} <br />
-              {randomString.substring(241, 320)}
+              {response.phraseId ? `${seed_phrase}` : ""}
             </p>
           </div>
         </div>
-        <div className="container p-6 my-6 border border-gray-400 rounded-lg bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg">
-          <h2 className="text-xl font-semibold">Recently Found Wallets</h2>
+        <div className="container p-2 my-2 border border-gray-400 rounded-lg bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg">
+          <h2 className="text-lg font-semibold">Recently Found Wallets</h2>
           <hr className="my-2 border-slate-500" />
-          <div className="p-3 my-6 border border-gray-400 rounded-lg border-opacity-20">
-            <p className="my-3">
-              {response
-                ? `seed phrase: ${response.seed_phrase.join("")} | network: ${
-                    response.network
-                  } | amount: ${response.amount}`
+          <div className="p-3 my-2 border border-gray-400 rounded-lg border-opacity-20">
+            <p className="my-2">
+              {response.phraseId
+                ? `seed phrase: ${seed_phrase} | network: ${response.network} | amount: ${response.amount}`
                 : "No saved wallet"}
             </p>
             {/* <ol className="list-decimal list-inside text-md">
@@ -115,8 +110,8 @@ const MainSEction = () => {
         </div>
       </div>
       <div className="">
-        <div className="p-6 mt-6 border border-gray-400 rounded-lg bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg">
-          <h3 className="mb-3 text-xl font-semibold">Select Network</h3>
+        <div className="p-2 mt-3 border border-gray-400 rounded-lg bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg">
+          <h3 className="mb-3 text-lg font-semibold">Select Network</h3>
           <div className="flex flex-wrap justify-between">
             <div className="p-2 my-2 rounded-md bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg">
               <label htmlFor="">
@@ -179,7 +174,7 @@ const MainSEction = () => {
               </label>
             </div>
           </div>
-          <h3 className="my-6 text-xl font-semibold">
+          <h3 className="my-2 text-lg font-semibold">
             Select Network Provider
           </h3>
           <div className="flex flex-wrap justify-between">
@@ -234,7 +229,7 @@ const MainSEction = () => {
               </label>
             </div>
           </div>
-          <h3 className="my-6 text-xl font-semibold">Select Duration</h3>
+          <h3 className="my-2 text-lg font-semibold">Select Duration</h3>
           <div className="flex flex-wrap justify-start">
             <div className="p-2 my-2 mr-2 rounded-md bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg">
               <label htmlFor="">
@@ -255,13 +250,21 @@ const MainSEction = () => {
               </label>
             </div>
           </div>
-          <button
-            onClick={handleButtonClick}
-            className="w-full p-3 mt-4 font-semibold uppercase bg-purple-800 rounded-lg"
-          >
-            find
-          </button>
-          <LicenseSection />
+          {isValidated ? (
+            <button
+              onClick={handleButtonClick}
+              className="w-full p-3 mt-4 font-semibold uppercase bg-purple-800 rounded-lg"
+            >
+              find
+            </button>
+          ) : (
+            <button
+              disabled
+              className="w-full p-3 mt-4 font-semibold uppercase bg-purple-800 bg-opacity-50 rounded-lg"
+            >
+              find
+            </button>
+          )}
         </div>
       </div>
     </div>
