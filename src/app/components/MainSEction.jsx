@@ -49,7 +49,6 @@ const MainSEction = () => {
     if (isValidated) {
       const startTime = new Date().getTime();
       generateRandomStringWithTimeout(startTime, timeout);
-      handleSubmit();
     } else {
       setOpenModal(true);
     }
@@ -69,6 +68,7 @@ const MainSEction = () => {
     } else {
       // If 2 minutes have passed, stop generating and update the state
       setRandomString(seed_phrase);
+      handleSubmit();
       // (optional: you can also display a message indicating the end of generation)
     }
   };
