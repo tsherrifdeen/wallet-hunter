@@ -3,6 +3,7 @@ import { useState } from "react";
 import Wallets from "./Wallets";
 import { useSelector } from "react-redux";
 import LicenseSection from "./LicenseSection";
+import Time from "./Time";
 const MainSEction = () => {
   const [openModal, setOpenModal] = useState(false);
   const [response, setResponse] = useState({});
@@ -131,24 +132,9 @@ const MainSEction = () => {
           </div>
           <h3 className="my-2 font-semibold text-md">Select Duration</h3>
           <div className="flex flex-wrap justify-start">
-            <div className="p-2 my-2 mr-2 rounded-md bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg">
-              <label htmlFor="">
-                <input type="checkbox" name="" id="" className="hidden" />
-                10min
-              </label>
-            </div>
-            <div className="p-2 my-2 mr-2 rounded-md bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg">
-              <label htmlFor="">
-                <input type="checkbox" name="" id="" className="hidden" />
-                30min
-              </label>
-            </div>
-            <div className="p-2 my-2 rounded-md bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg">
-              <label htmlFor="">
-                <input type="checkbox" name="" id="" className="hidden" />
-                60min
-              </label>
-            </div>
+            <Time time="10min" />
+            <Time time="30min" />
+            <Time time="60min" />
           </div>
           <button
             onClick={handleButtonClick}
