@@ -9,7 +9,7 @@ export default function Wallets({ imageSrc }) {
 
   return (
     <div
-      className={`item p-2 mr-2 rounded-md bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg ${
+      className={`item p-2 mr-2 mt-1 rounded-md bg-slate-600 bg-opacity-15 border-opacity-20 backdrop-blur-lg ${
         isSelected ? "bg-slate-400 bg-opacity-50" : ""
       }`}
       onClick={toggleSelection}
