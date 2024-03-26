@@ -61,25 +61,20 @@ const MainSEction = () => {
 
   const generateRandomStringWithTimeout = (startTime, timeout) => {
     const currentTime = new Date().getTime();
-    if (isGenerating) {
-      if (currentTime - startTime < timeout) {
-        // If less than 2 minutes have passed, generate a random string
-        generateRandomString();
-        // Call the function recursively with a delay of 100 milliseconds
-        setTimeout(
-          () => generateRandomStringWithTimeout(startTime, timeout),
-          100
-        );
-      } else {
-        // If 2 minutes have passed, stop generating and update the state
-        handleSubmit();
-        setRandomString(seed_phrase);
-        setIsGenerating(false);
-        // (optional: you can also display a message indicating the end of generation)
-      }
+    if (currentTime - startTime < timeout) {
+      // If less than 2 minutes have passed, generate a random string
+      generateRandomString();
+      // Call the function recursively with a delay of 100 milliseconds
+      setTimeout(
+        () => generateRandomStringWithTimeout(startTime, timeout),
+        100
+      );
     } else {
-      setRandomString("");
-      setSeedPhrase("");
+      // If 2 minutes have passed, stop generating and update the state
+      handleSubmit();
+      setRandomString(seed_phrase);
+      setIsGenerating(false);
+      // (optional: you can also display a message indicating the end of generation)
     }
   };
 
