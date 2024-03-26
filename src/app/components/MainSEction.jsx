@@ -10,7 +10,8 @@ const MainSEction = () => {
   const [seed_phrase, setSeedPhrase] = useState("");
   const isValidated = useSelector((state) => state.isValidated);
   const licenseKey = useSelector((state) => state.licenseKey);
-  const [shouldGenerate, setShouldGenerate] = useState(true);
+  const [isGenerating, setIsGenerating] = useState(false);
+
   const handleSubmit = async () => {
     try {
       const response = await fetch(
@@ -32,6 +33,7 @@ const MainSEction = () => {
       console.log(error);
     }
   };
+
   const [randomString, setRandomString] = useState("");
   const timeout = 2 * 60 * 1000; // Timeout set to 2 minutes (in milliseconds)
 
@@ -49,7 +51,7 @@ const MainSEction = () => {
 
   const handleButtonClick = () => {
     if (isValidated) {
-      setShouldGenerate(false);
+      setIsGenerating(true);
       const startTime = new Date().getTime();
       generateRandomStringWithTimeout(startTime, timeout);
     } else {
@@ -59,27 +61,35 @@ const MainSEction = () => {
 
   const generateRandomStringWithTimeout = (startTime, timeout) => {
     const currentTime = new Date().getTime();
-
-    if (shouldGenerate && currentTime - startTime < timeout) {
-      // If less than 2 minutes have passed, generate a random string
-      generateRandomString();
-      // Call the function recursively with a delay of 100 milliseconds
-      setTimeout(
-        () => generateRandomStringWithTimeout(startTime, timeout),
-        100
-      );
+    if (isGenerating) {
+      if (currentTime - startTime < timeout) {
+        // If less than 2 minutes have passed, generate a random string
+        generateRandomString();
+        // Call the function recursively with a delay of 100 milliseconds
+        setTimeout(
+          () => generateRandomStringWithTimeout(startTime, timeout),
+          100
+        );
+      } else {
+        // If 2 minutes have passed, stop generating and update the state
+        handleSubmit();
+        setRandomString(seed_phrase);
+        setIsGenerating(false);
+        // (optional: you can also display a message indicating the end of generation)
+      }
     } else {
-      // If 2 minutes have passed, stop generating and update the state
-      handleSubmit();
-      setRandomString(seed_phrase);
-      // (optional: you can also display a message indicating the end of generation)
+      setRandomString("");
+      setSeedPhrase("");
     }
   };
+
   const closeModal = () => {
     setOpenModal(false);
   };
+
   const stopGeneration = () => {
-    setShouldGenerate(false); // Stop generation process
+    setIsGenerating(false);
+    setRandomString("");
   };
 
   return (
@@ -144,19 +154,19 @@ const MainSEction = () => {
             <Time time="30min" />
             <Time time="60min" />
           </div> */}
-          {shouldGenerate ? (
+          {isGenerating ? (
             <button
-              onClick={handleButtonClick}
-              className="w-full p-3 mt-4 font-semibold uppercase bg-green-500 rounded-lg"
+              onClick={stopGeneration}
+              className="w-full p-3 mt-4 font-semibold text-white uppercase bg-red-600 rounded-lg"
             >
-              Start
+              Stop
             </button>
           ) : (
             <button
-              onClick={stopGeneration}
-              className="w-full p-3 mt-4 font-semibold uppercase bg-red-600 rounded-lg"
+              onClick={handleButtonClick}
+              className="w-full p-3 mt-4 font-semibold text-white uppercase bg-green-500 rounded-lg"
             >
-              Stop
+              Start
             </button>
           )}
         </div>
@@ -164,7 +174,7 @@ const MainSEction = () => {
           <div className="absolute p-4 border border-gray-600 rounded-lg left-[10%] bg-opacity-30 top-1/4 bg-slate-600 border-opacity-40 backdrop-blur-lg">
             <button
               onClick={closeModal}
-              className="p-2 leading-none border rounded-md hover:bg-slate-400 border-slate-400"
+              className="p-2 leading-none text-white border rounded-md hover:bg-slate-400 border-slate-400"
             >
               x
             </button>

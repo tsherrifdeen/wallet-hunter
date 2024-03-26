@@ -25,7 +25,7 @@ body {
     )
     rgb(var(--background-start-rgb)); */
 
-  color: whitesmoke;
+  color: yellow;
   background: #030517;
   overflow-x: hidden;
 }

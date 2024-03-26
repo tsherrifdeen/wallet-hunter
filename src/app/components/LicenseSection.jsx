@@ -45,7 +45,7 @@ const LicenseSection = () => {
   };
 
   return (
-    <div className="w-full mt-6 text-white">
+    <div className="w-full mt-6 ">
       <h3 className="mb-4 text-lg font-semibold">License</h3>
       <input
         type="text"
@@ -55,7 +55,7 @@ const LicenseSection = () => {
         placeholder="Enter License Key"
       />
       <button
-        className="w-full p-3 mt-4 font-semibold uppercase border border-purple-800 rounded-lg hover:bg-purple-800"
+        className="w-full p-3 mt-4 font-semibold text-white uppercase border border-purple-800 rounded-lg hover:bg-purple-800"
         onClick={handleSubmit}
       >
         {isLoading ? "Checking..." : "Enter"}

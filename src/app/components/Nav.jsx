@@ -14,7 +14,7 @@ const Nav = () => {
       </div>
 
       <button
-        className="p-3 border rounded-lg border-slate-600"
+        className="p-3 text-white border rounded-lg border-slate-600"
         onClick={handleClick}
       >
         {isOpen ? (
