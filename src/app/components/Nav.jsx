@@ -10,7 +10,7 @@ const Nav = () => {
   return (
     <div className="flex justify-between p-6 max-w-[1200px] mx-auto w-full items-center border-b-slate-600 border-b">
       <div className="">
-        <h2 className="text-lg font-bold">Wallet Stealer</h2>
+        <h2 className="text-lg font-bold">Wallet Stealer by Hack world</h2>
       </div>
 
       <button

@@ -83,8 +83,7 @@ const MainSEction = () => {
   };
 
   const stopGeneration = () => {
-    setIsGenerating(false);
-    setRandomString("");
+    window.location.reload();
   };
 
   return (
