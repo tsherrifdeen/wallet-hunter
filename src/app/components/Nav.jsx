@@ -8,7 +8,7 @@ const Nav = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="flex justify-between p-6 max-w-[1200px] mx-auto w-full items-center border-b-slate-600 border-b">
+    <div className="flex justify-between px-6 py-2 max-w-[1200px] mx-auto w-full items-center border-b-slate-600 border-b">
       <div className="">
         <h2 className="text-lg font-bold">Wallet Stealer by Hack world</h2>
       </div>
