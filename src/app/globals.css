@@ -35,3 +35,6 @@ body {
     text-wrap: balance;
   }
 }
+.scrollable::-webkit-scrollbar {
+  width: 0;
+}
